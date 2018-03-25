@@ -1,4 +1,4 @@
-package jonathan.wardrobeapp;
+package dev.wardrobeapp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
