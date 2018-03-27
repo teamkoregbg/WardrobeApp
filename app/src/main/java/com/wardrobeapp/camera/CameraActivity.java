@@ -44,7 +44,6 @@ public class CameraActivity extends FragmentActivity {
     }
 
     public void selectFrag(View view) {
-        System.out.println("yo");
         Fragment fr = null;
 
         if(view == findViewById(R.id.addButton))
@@ -58,16 +57,12 @@ public class CameraActivity extends FragmentActivity {
     private void setFrag(Fragment fr) {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.fragment, fr);
+        ft.replace(R.id.fragment_placeholder, fr);
         ft.commit();
     }
 
     public void onCapturePhoto(View view) {
         dispatchTakePictureIntent();
-    }
-
-    public void onSaveImage(View view) {
-
     }
 
 
