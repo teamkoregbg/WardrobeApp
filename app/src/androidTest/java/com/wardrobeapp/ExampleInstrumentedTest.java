@@ -1,4 +1,4 @@
-package dev.wardrobeapp;
+package com.wardrobeapp;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

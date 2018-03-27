@@ -1,5 +1,7 @@
-package dev.wardrobeapp.camera;
+package com.wardrobeapp.camera;
 
+
+import android.view.View;
 
 import java.io.File;
 import java.io.IOException;

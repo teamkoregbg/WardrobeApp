@@ -1,41 +1,41 @@
-package dev.wardrobeapp.camera;
+package com.wardrobeapp.camera;
 
 import android.app.Activity;
-import android.content.ContentValues;
+import android.app.ActivityManager;
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.FileProvider;
 import android.view.View;
-import android.widget.ImageView;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import dev.wardrobeapp.R;
+import com.wardrobeapp.R;
 
 /**
  * Created by Jonathan Köre on 2018-03-26.
  */
 
-public class CameraActivity extends Activity {
+public class CameraActivity extends FragmentActivity {
 
-    private ImageView imageView;
-
+    static final int REQUEST_TAKE_PHOTO = 1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.camera_layout);
+        setContentView(R.layout.camera_main);
+        setFrag(new EditItemFragment());
 
-        imageView = (ImageView)findViewById(R.id.image_view);
     }
 
     @Override
@@ -43,7 +43,26 @@ public class CameraActivity extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    public void onCaptureImage(View view) {
+    public void selectFrag(View view) {
+        System.out.println("yo");
+        Fragment fr = null;
+
+        if(view == findViewById(R.id.addButton))
+            fr = new AddItemFragment();
+        else if (view == findViewById(R.id.editButton))
+            fr = new EditItemFragment();
+
+        setFrag(fr);
+    }
+
+    private void setFrag(Fragment fr) {
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.fragment, fr);
+        ft.commit();
+    }
+
+    public void onCapturePhoto(View view) {
         dispatchTakePictureIntent();
     }
 
@@ -51,7 +70,6 @@ public class CameraActivity extends Activity {
 
     }
 
-    static final int REQUEST_TAKE_PHOTO = 1;
 
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
