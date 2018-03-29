@@ -1,4 +1,4 @@
-package dev.wardrobeapp;
+package com.wardrobeapp;
 
 import org.junit.Test;
 
